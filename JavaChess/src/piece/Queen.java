@@ -1,48 +1,45 @@
 package piece;
 
 import board.Board;
-import move.AttackMove;
-import move.MajorMove;
 import move.Move;
-import tile.Tile;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
-import static utils.Constants.PieceConstants.BISHOP_CANDIDATE_MOVE_VECTOR_COORDS;
-import static utils.HelperMethods.*;
+import static utils.Constants.PieceConstants.QUEEN_CANDIDATE_MOVE_VECTOR_COORDS;
+import static utils.HelperMethods.FindSlidingPieceLegalMoves;
 
 /**
- * This is the class for the Bishop chess piece.
+ * This is the class for the Queen chess piece.
  */
-public class Bishop extends Piece {
+public class Queen extends Piece {
 
     /**
-     * Constructor for the Bishop.
-     * @param piecePosition the position of the Bishop
+     * Constructor for the Queen.
+     * @param piecePosition the position of the Queen
      * @param pieceAlliance black/white
      */
-    public Bishop(final int piecePosition, final Alliance pieceAlliance) {
+    public Queen(final int piecePosition, final Alliance pieceAlliance) {
         super(piecePosition, pieceAlliance);
     }
 
     /**
-     * Calculates the moves of the Bishop.
-     * @param board the board holding the piece
-     * @return a list of legal moves for the Bishop
+     * Calculates the moves of the Queen.
+     * @param board the board holding the Queen
+     * @return a list of legal moves for the Queen
      */
     @Override
     public Collection<Move> calculateLegalMoves(final Board board) {
         final List<Move> legalMoves = new ArrayList<>();
 
-        // Iterate through all offsets for the Bishop to determine legal moves
-        for (final int currentCandidateOffset : BISHOP_CANDIDATE_MOVE_VECTOR_COORDS) {
+        // Iterate through all offsets for the Queen to determine legal moves
+        for (final int currentCandidateOffset : QUEEN_CANDIDATE_MOVE_VECTOR_COORDS) {
             // Determine the first destination coordinate
             int candidateDestinationCoordinate = this.piecePosition + currentCandidateOffset;
 
-            // Find the Bishop's legal moves
+            // Find the Queen's legal moves
             FindSlidingPieceLegalMoves(
                     candidateDestinationCoordinate,
                     this,

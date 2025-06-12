@@ -2,6 +2,9 @@ package board;
 
 import tile.Tile;
 
+/**
+ * This class pertains to the chess board.
+ */
 public class Board {
 
     /**

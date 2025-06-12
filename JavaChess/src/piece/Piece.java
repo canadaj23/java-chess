@@ -24,7 +24,6 @@ public abstract class Piece {
 
     /**
      * Calculates the moves of a given piece.
-     *
      * @param board the board holding the piece
      * @return a list of legal moves for a given piece
      */

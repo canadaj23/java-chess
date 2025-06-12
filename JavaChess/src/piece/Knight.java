@@ -21,17 +21,15 @@ public class Knight extends Piece {
 
     /**
      * Constructor for a Knight.
-     *
      * @param piecePosition the position of the Knight
      * @param pieceAlliance black/white
      */
-    protected Knight(final int piecePosition, final Alliance pieceAlliance) {
+    public Knight(final int piecePosition, final Alliance pieceAlliance) {
         super(piecePosition, pieceAlliance);
     }
 
     /**
      * Calculates the moves of the Knight.
-     *
      * @param board the board holding the Knight
      * @return a list of legal moves for the Knight
      */
@@ -41,18 +39,18 @@ public class Knight extends Piece {
 
         // Iterate through all offsets for the Knight to determine legal moves
         for (final int currentCandidateOffset : KNIGHT_CANDIDATE_MOVE_COORDS) {
-            int candidateDestinationCoord = this.piecePosition + currentCandidateOffset;
+            int candidateDestinationCoordinate = this.piecePosition + currentCandidateOffset;
 
             // Determine if the Knight is within the bounds of the board
-            if (IsValidTileCoordinate(candidateDestinationCoord)) {
+            if (IsValidTileCoordinate(candidateDestinationCoordinate)) {
                 // Determine if the Knight is on the 1st, 2nd, 7th, or 8th columns
-                if (isKnightColumnExcluded(candidateDestinationCoord)) {
+                if (isKnightColumnExcluded(candidateDestinationCoordinate)) {
                     continue;
                 }
                 // Obtain the destination tile with the new coordinate
-                final Tile candidateDestinationTile = board.getTile(candidateDestinationCoord);
+                final Tile candidateDestinationTile = board.getTile(candidateDestinationCoordinate);
                 // Determine what move the Knight is trying to do
-                determineKnightMove(candidateDestinationTile, legalMoves, board, candidateDestinationCoord);
+                determineKnightMove(candidateDestinationTile, legalMoves, board, candidateDestinationCoordinate);
             }
         }
         return Collections.unmodifiableList(legalMoves);

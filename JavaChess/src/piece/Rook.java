@@ -11,38 +11,38 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
-import static utils.Constants.PieceConstants.BISHOP_CANDIDATE_MOVE_VECTOR_COORDS;
+import static utils.Constants.PieceConstants.ROOK_CANDIDATE_MOVE_VECTOR_COORDS;
 import static utils.HelperMethods.*;
 
 /**
- * This is the class for the Bishop chess piece.
+ * This is the class for the Rook chess piece.
  */
-public class Bishop extends Piece {
+public class Rook extends Piece {
 
     /**
-     * Constructor for the Bishop.
-     * @param piecePosition the position of the Bishop
+     * Constructor for a Rook.
+     * @param piecePosition the position of the Rook
      * @param pieceAlliance black/white
      */
-    public Bishop(final int piecePosition, final Alliance pieceAlliance) {
+    public Rook(int piecePosition, Alliance pieceAlliance) {
         super(piecePosition, pieceAlliance);
     }
 
     /**
-     * Calculates the moves of the Bishop.
-     * @param board the board holding the piece
-     * @return a list of legal moves for the Bishop
+     * Calculates the moves of the Rook.
+     * @param board the board holding the Rook
+     * @return a list of legal moves for the Rook
      */
     @Override
     public Collection<Move> calculateLegalMoves(final Board board) {
         final List<Move> legalMoves = new ArrayList<>();
 
-        // Iterate through all offsets for the Bishop to determine legal moves
-        for (final int currentCandidateOffset : BISHOP_CANDIDATE_MOVE_VECTOR_COORDS) {
+        // Iterate through all offsets for the Rook to determine legal moves
+        for (final int currentCandidateOffset : ROOK_CANDIDATE_MOVE_VECTOR_COORDS) {
             // Determine the first destination coordinate
             int candidateDestinationCoordinate = this.piecePosition + currentCandidateOffset;
 
-            // Find the Bishop's legal moves
+            // Find the Rook's legal moves
             FindSlidingPieceLegalMoves(
                     candidateDestinationCoordinate,
                     this,
