@@ -1,15 +1,9 @@
 package piece;
 
 import board.Board;
-import move.AttackMove;
-import move.MajorMove;
 import move.Move;
-import tile.Tile;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 import static utils.Constants.PieceConstants.BISHOP_CANDIDATE_MOVE_VECTOR_COORDS;
 import static utils.HelperMethods.*;
@@ -24,8 +18,9 @@ public class Bishop extends Piece {
      * @param piecePosition the position of the Bishop
      * @param pieceAlliance black/white
      */
-    public Bishop(final int piecePosition, final Alliance pieceAlliance) {
+    public Bishop(int piecePosition, Alliance pieceAlliance) {
         super(piecePosition, pieceAlliance);
+        pieceName = getPieceAlliance().isBlack() ? "b" : "B";
     }
 
     /**
@@ -40,7 +35,7 @@ public class Bishop extends Piece {
         // Iterate through all offsets for the Bishop to determine legal moves
         for (final int currentCandidateOffset : BISHOP_CANDIDATE_MOVE_VECTOR_COORDS) {
             // Determine the first destination coordinate
-            int candidateDestinationCoordinate = this.piecePosition + currentCandidateOffset;
+            final int candidateDestinationCoordinate = this.piecePosition + currentCandidateOffset;
 
             // Find the Bishop's legal moves
             FindSlidingPieceLegalMoves(

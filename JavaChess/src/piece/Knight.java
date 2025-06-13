@@ -6,10 +6,7 @@ import move.MajorMove;
 import move.Move;
 import tile.Tile;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 import static utils.Constants.PieceConstants.KNIGHT_CANDIDATE_MOVE_COORDS;
 import static utils.HelperMethods.IsValidTileCoordinate;
@@ -26,6 +23,7 @@ public class Knight extends Piece {
      */
     public Knight(final int piecePosition, final Alliance pieceAlliance) {
         super(piecePosition, pieceAlliance);
+        pieceName = getPieceAlliance().isBlack() ? "n" : "N";
     }
 
     /**
@@ -39,7 +37,7 @@ public class Knight extends Piece {
 
         // Iterate through all offsets for the Knight to determine legal moves
         for (final int currentCandidateOffset : KNIGHT_CANDIDATE_MOVE_COORDS) {
-            int candidateDestinationCoordinate = this.piecePosition + currentCandidateOffset;
+            final int candidateDestinationCoordinate = this.piecePosition + currentCandidateOffset;
 
             // Determine if the Knight is within the bounds of the board
             if (IsValidTileCoordinate(candidateDestinationCoordinate)) {

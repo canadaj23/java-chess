@@ -35,4 +35,12 @@ public final class EmptyTile extends Tile {
     public Piece getPieceOnTile() {
         return null;
     }
+
+    /**
+     * @return a String version of an empty tile
+     */
+    @Override
+    public String toString() {
+        return "-";
+    }
 }

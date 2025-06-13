@@ -36,4 +36,12 @@ public final class OccupiedTile extends Tile {
     public Piece getPieceOnTile() {
         return pieceOnTile;
     }
+
+    /**
+     * @return the piece in String form
+     */
+    @Override
+    public String toString() {
+        return getPieceOnTile().toString();
+    }
 }

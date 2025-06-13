@@ -2,6 +2,8 @@ package tile;
 
 import piece.Piece;
 
+import static tile.TileManager.EMPTY_TILES_CACHE;
+
 /**
  * This class is a blueprint for different types of tiles.
  * E.g., empty or occupied tiles
@@ -15,6 +17,10 @@ public abstract class Tile {
      */
     protected Tile(final int tileCoordinate) {
         this.tileCoordinate = tileCoordinate;
+    }
+
+    public static Tile createTile(final int tileCoordinate, final Piece piece) {
+        return piece != null ? new OccupiedTile(tileCoordinate, piece) : EMPTY_TILES_CACHE.get(tileCoordinate);
     }
 
     /**

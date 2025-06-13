@@ -13,7 +13,7 @@ import static utils.Constants.BoardConstants.TILES_ON_BOARD;
  */
 public class TileManager {
     
-    private static final Map<Integer, EmptyTile> EMPTY_TILES_CACHE = CreateAllEmptyTiles();
+    protected static final Map<Integer, EmptyTile> EMPTY_TILES_CACHE = CreateAllEmptyTiles();
 
     /**
      * Constructor for a TileManager object.

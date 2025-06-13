@@ -4,10 +4,7 @@ import board.Board;
 import move.MajorMove;
 import move.Move;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 import static utils.Constants.PieceConstants.PAWN_CANDIDATE_MOVE_COORD;
 import static utils.HelperMethods.*;
@@ -23,8 +20,9 @@ public class Pawn extends Piece {
      * @param piecePosition the position of the Pawn
      * @param pieceAlliance black/white
      */
-    protected Pawn(final int piecePosition, final Alliance pieceAlliance) {
+    public Pawn(final int piecePosition, final Alliance pieceAlliance) {
         super(piecePosition, pieceAlliance);
+        pieceName = getPieceAlliance().isBlack() ? "p" : "P";
     }
 
     /**
@@ -34,7 +32,7 @@ public class Pawn extends Piece {
      * @return a list of legal moves for the Pawn
      */
     @Override
-    public Collection<Move> calculateLegalMoves(Board board) {
+    public Collection<Move> calculateLegalMoves(final Board board) {
         final List<Move> legalMoves = new ArrayList<>();
 
         // Iterate through all offsets for the Pawn to determine legal moves

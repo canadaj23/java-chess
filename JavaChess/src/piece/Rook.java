@@ -1,15 +1,9 @@
 package piece;
 
 import board.Board;
-import move.AttackMove;
-import move.MajorMove;
 import move.Move;
-import tile.Tile;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 import static utils.Constants.PieceConstants.ROOK_CANDIDATE_MOVE_VECTOR_COORDS;
 import static utils.HelperMethods.*;
@@ -24,8 +18,9 @@ public class Rook extends Piece {
      * @param piecePosition the position of the Rook
      * @param pieceAlliance black/white
      */
-    public Rook(int piecePosition, Alliance pieceAlliance) {
+    public Rook(final int piecePosition, final Alliance pieceAlliance) {
         super(piecePosition, pieceAlliance);
+        pieceName = getPieceAlliance().isBlack() ? "r" : "R";
     }
 
     /**
@@ -40,7 +35,7 @@ public class Rook extends Piece {
         // Iterate through all offsets for the Rook to determine legal moves
         for (final int currentCandidateOffset : ROOK_CANDIDATE_MOVE_VECTOR_COORDS) {
             // Determine the first destination coordinate
-            int candidateDestinationCoordinate = this.piecePosition + currentCandidateOffset;
+            final int candidateDestinationCoordinate = this.piecePosition + currentCandidateOffset;
 
             // Find the Rook's legal moves
             FindSlidingPieceLegalMoves(

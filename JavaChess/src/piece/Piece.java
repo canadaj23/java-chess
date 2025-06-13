@@ -12,9 +12,11 @@ public abstract class Piece {
     protected final int piecePosition;
     protected final Alliance pieceAlliance;
     protected final boolean firstMove;
+    protected String pieceName;
 
     /**
      * Constructor for a Piece.
+     *
      * @param piecePosition the position of the piece
      * @param pieceAlliance black/white
      */
@@ -41,9 +43,25 @@ public abstract class Piece {
     }
 
     /**
+     * Determines the coordinate of the piece.
+     * @return coordinate of the piece
+     */
+    public int getPiecePosition() {
+        return this.piecePosition;
+    }
+
+    /**
      * @return whether it is the piece's first move
      */
     public boolean isFirstMove() {
         return this.firstMove;
+    }
+
+    /**
+     * @return the name of each piece as a String
+     */
+    @Override
+    public String toString() {
+        return this.pieceName;
     }
 }

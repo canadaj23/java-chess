@@ -3,12 +3,9 @@ package piece;
 import board.Board;
 import move.Move;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
-import static utils.Constants.PieceConstants.QUEEN_CANDIDATE_MOVE_VECTOR_COORDS;
+import static utils.Constants.PieceConstants.QUEEN_OR_KING_CANDIDATE_MOVE_VECTOR_COORDS;
 import static utils.HelperMethods.FindSlidingPieceLegalMoves;
 
 /**
@@ -23,6 +20,7 @@ public class Queen extends Piece {
      */
     public Queen(final int piecePosition, final Alliance pieceAlliance) {
         super(piecePosition, pieceAlliance);
+        pieceName = getPieceAlliance().isBlack() ? "q" : "Q";
     }
 
     /**
@@ -35,9 +33,9 @@ public class Queen extends Piece {
         final List<Move> legalMoves = new ArrayList<>();
 
         // Iterate through all offsets for the Queen to determine legal moves
-        for (final int currentCandidateOffset : QUEEN_CANDIDATE_MOVE_VECTOR_COORDS) {
+        for (final int currentCandidateOffset : QUEEN_OR_KING_CANDIDATE_MOVE_VECTOR_COORDS) {
             // Determine the first destination coordinate
-            int candidateDestinationCoordinate = this.piecePosition + currentCandidateOffset;
+            final int candidateDestinationCoordinate = this.piecePosition + currentCandidateOffset;
 
             // Find the Queen's legal moves
             FindSlidingPieceLegalMoves(
