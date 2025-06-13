@@ -2,6 +2,9 @@ package board;
 
 import move.Move;
 import piece.*;
+import player.BlackPlayer;
+import player.Player;
+import player.WhitePlayer;
 import tile.Tile;
 
 import java.util.*;
@@ -16,6 +19,9 @@ import static utils.Constants.BoardConstants.TILES_PER_ROW;
 public class Board {
     private final List<Tile> gameBoard;
     private final Collection<Piece> whitePieces, blackPieces;
+    private final WhitePlayer whitePlayer;
+    private final BlackPlayer blackPlayer;
+    private final Player currentPlayer;
 
     /**
      * Privately accessed constructor for a Board object.
@@ -28,6 +34,11 @@ public class Board {
 
         final Collection<Move> whiteInitialLegalMoves = calculateLegalMoves(this.whitePieces);
         final Collection<Move> blackInitialLegalMoves = calculateLegalMoves(this.blackPieces);
+
+        this.whitePlayer = new WhitePlayer(this, whiteInitialLegalMoves, blackInitialLegalMoves);
+        this.blackPlayer = new BlackPlayer(this, whiteInitialLegalMoves, blackInitialLegalMoves);
+
+        this.currentPlayer = null;
     }
 
     /**
@@ -157,6 +168,30 @@ public class Board {
         return gameBoard.get(candidateDestinationCoordinate);
     }
 
+    /**
+     * @return all the white pieces
+     */
+    public Collection<Piece> getWhitePieces() {
+        return this.whitePieces;
+    }
+
+    /**
+     * @return all the black pieces
+     */
+    public Collection<Piece> getBlackPieces() {
+        return this.blackPieces;
+    }
+
+    /**
+     * @return the player's opponent
+     */
+    public Player getOpponent(final Alliance alliance) {
+        return alliance == BLACK ? whitePlayer : blackPlayer;
+    }
+
+    /**
+     * @return the chess board as Strings
+     */
     @Override
     public String toString() {
         final StringBuilder stringBuilder = new StringBuilder();
@@ -171,6 +206,13 @@ public class Board {
         }
 
         return stringBuilder.toString();
+    }
+
+    /**
+     * @return the current player
+     */
+    public Player getCurrentPlayer() {
+        return this.currentPlayer;
     }
 
     /**

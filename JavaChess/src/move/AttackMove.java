@@ -24,4 +24,12 @@ public final class AttackMove extends Move {
         super(board, movedPiece, destinationCoordinate);
         this.attackedPiece = attackedPiece;
     }
+
+    /**
+     * @return the new board with the executed AttackMove
+     */
+    @Override
+    public Board executeMove() {
+        return null;
+    }
 }

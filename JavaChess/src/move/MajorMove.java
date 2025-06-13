@@ -20,4 +20,12 @@ public final class MajorMove extends Move {
              final int destinationCoordinate) {
         super(board, movedPiece, destinationCoordinate);
     }
+
+    /**
+     * @return the new board with the executed MajorMove
+     */
+    @Override
+    public Board executeMove() {
+        return null;
+    }
 }

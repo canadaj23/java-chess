@@ -19,10 +19,17 @@ public abstract class Tile {
         this.tileCoordinate = tileCoordinate;
     }
 
+    /**
+     * Creates a tile for the chess board.
+     * @param tileCoordinate where the tile should be
+     * @param piece what piece should be on the tile
+     * @return a tile with a coordinate and a possible piece
+     */
     public static Tile createTile(final int tileCoordinate, final Piece piece) {
         return piece != null ? new OccupiedTile(tileCoordinate, piece) : EMPTY_TILES_CACHE.get(tileCoordinate);
     }
 
+    //---------------------------- Abstract Methods ----------------------------
     /**
      * Determines an empty/occupied tile.
      * @return whether the tile is occupied

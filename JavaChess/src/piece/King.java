@@ -23,6 +23,7 @@ public class King extends Piece {
     public King(final int piecePosition, final Alliance pieceAlliance) {
         super(piecePosition, pieceAlliance);
         pieceName = getPieceAlliance().isBlack() ? "k" : "K";
+        isKing = true;
     }
 
     /**

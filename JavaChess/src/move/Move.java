@@ -23,4 +23,16 @@ public abstract class Move {
         this.movedPiece = movedPiece;
         this.destinationCoordinate = destinationCoordinate;
     }
+
+    /**
+     * @return the coordinate of the destination tile
+     */
+    public int getDestinationCoordinate() {
+        return this.destinationCoordinate;
+    }
+
+    /**
+     * @return the new board with the executed move
+     */
+    public abstract Board executeMove();
 }

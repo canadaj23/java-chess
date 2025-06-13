@@ -13,6 +13,7 @@ public abstract class Piece {
     protected final Alliance pieceAlliance;
     protected final boolean firstMove;
     protected String pieceName;
+    protected boolean isKing = false;
 
     /**
      * Constructor for a Piece.
@@ -26,13 +27,6 @@ public abstract class Piece {
         // TODO: implement more attributes for pieces
         this.firstMove = false;
     }
-
-    /**
-     * Calculates the moves of a given piece.
-     * @param board the board holding the piece
-     * @return a list of legal moves for a given piece
-     */
-    public abstract Collection<Move> calculateLegalMoves(final Board board);
 
     /**
      * Determines the alliance of the piece.
@@ -58,10 +52,32 @@ public abstract class Piece {
     }
 
     /**
+     * @return the piece name
+     */
+    public String getPieceName() {
+        return this.pieceName;
+    }
+
+    /**
+     * @return whether the piece is a King
+     */
+    public boolean isKing() {
+        return this.isKing;
+    }
+
+    /**
      * @return the name of each piece as a String
      */
     @Override
     public String toString() {
         return this.pieceName;
     }
+
+    //---------------------------- Abstract Method ----------------------------
+    /**
+     * Calculates the moves of a given piece.
+     * @param board the board holding the piece
+     * @return a list of legal moves for a given piece
+     */
+    public abstract Collection<Move> calculateLegalMoves(final Board board);
 }
