@@ -41,7 +41,7 @@ public class HelperMethods {
         // Continue while the sliding piece is within the bounds of the board
         while (IsValidTileCoordinate(candidateDestinationCoordinate)) {
             // Determine if the sliding piece on the 1st or 8th columns
-            if (isSlidingPieceColumnExcluded(candidateDestinationCoordinate)) {
+            if (IsSlidingPieceColumnExcluded(candidateDestinationCoordinate)) {
                 break;
             }
             // Obtain the destination tile with the new coordinate
@@ -87,8 +87,42 @@ public class HelperMethods {
      * @param candidateDestinationCoordinate where the piece wants to move to
      * @return if the piece's destination is the 1st or 8th columns
      */
-    public static boolean isSlidingPieceColumnExcluded(int candidateDestinationCoordinate) {
+    public static boolean IsSlidingPieceColumnExcluded(int candidateDestinationCoordinate) {
         int column = (candidateDestinationCoordinate % 8) + 1;
         return column == 1 || column == 8;
+    }
+
+
+    /**
+     * Determines the row (2 or 7) of a pawn.
+     * @param candidateDestinationCoordinate the coordinate of the pawn's destination
+     * @param pawn the pawn to be placed
+     * @return what row the pawn should be on
+     */
+    public static boolean IsPawnOnSecondOrSeventhRow(int candidateDestinationCoordinate, Piece pawn) {
+        int row = (candidateDestinationCoordinate % 8) + 1;
+        return (row == 2 && pawn.getPieceAlliance().isBlack()) || (row == 7 && pawn.getPieceAlliance().isWhite());
+    }
+
+    /**
+     * Determines the column (1 or 8) of a pawn.
+     * @param candidateDestinationCoordinate the coordinate of the pawn's destination
+     * @param pawn the pawn to be placed
+     * @return what column the pawn should be on
+     */
+    public static boolean IsPawnOnFirstOrEighthColumn(int candidateDestinationCoordinate, Piece pawn) {
+        int column = (candidateDestinationCoordinate % 8) + 1;
+        return (column == 1 && pawn.getPieceAlliance().isBlack()) || (column == 8 && pawn.getPieceAlliance().isWhite());
+    }
+
+    /**
+     * Determines the column (1 or 8) of a pawn.
+     * @param candidateDestinationCoordinate the coordinate of the pawn's destination
+     * @param pawn the pawn to be placed
+     * @return what column the pawn should be on
+     */
+    public static boolean IsPawnOnFirstOrEighthColumnReversed(int candidateDestinationCoordinate, Piece pawn) {
+        int column = (candidateDestinationCoordinate % 8) + 1;
+        return (column == 1 && pawn.getPieceAlliance().isWhite()) || (column == 8 && pawn.getPieceAlliance().isBlack());
     }
 }

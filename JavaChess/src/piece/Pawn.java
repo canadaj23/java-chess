@@ -6,10 +6,11 @@ import move.Move;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 import static utils.Constants.PieceConstants.PAWN_CANDIDATE_MOVE_COORD;
-import static utils.HelperMethods.IsValidTileCoordinate;
+import static utils.HelperMethods.*;
 
 /**
  * This is the class for the Pawn chess piece.
@@ -39,22 +40,77 @@ public class Pawn extends Piece {
         // Iterate through all offsets for the Pawn to determine legal moves
         for (final int currentCandidateOffset : PAWN_CANDIDATE_MOVE_COORD) {
             // Determine the first destination coordinate
-            int candidateDestinationCoordinate =
+            final int candidateDestinationCoordinate =
                     this.piecePosition +
-                    (getPieceAlliance().getDirection() * currentCandidateOffset);
+                    (this.pieceAlliance.getDirection() * currentCandidateOffset);
             // If the pawn is at the bottom or top row, it cannot progress more
             if (!IsValidTileCoordinate(candidateDestinationCoordinate)) {
                 continue;
             }
 
-            // Progress if the tile is forward by one and the destination tile is empty
-            if (currentCandidateOffset == 8 && !(board.getTile(candidateDestinationCoordinate).isTileOccupied())) {
-                // TODO: implement how a pawn should actually move
+            // Non-attacking move
+            if (isNonAttackingMove(currentCandidateOffset, candidateDestinationCoordinate, board)) {
+                // TODO: implement pawn promotion
                 legalMoves.add(new MajorMove(board, this, candidateDestinationCoordinate));
+            } else if (canDoubleJump(currentCandidateOffset, candidateDestinationCoordinate)) { // Double jump
+                // Get the coordinate of the tile behind the candidate destination tile
+                final int coordinateBehindCandidate = this.piecePosition + (this.pieceAlliance.getDirection() * 8);
+
+                if (!board.getTile(coordinateBehindCandidate).isTileOccupied() &&
+                    !board.getTile(candidateDestinationCoordinate).isTileOccupied()) {
+                    // Once all checks pass, the pawn can jump two empty tiles
+                    legalMoves.add(new MajorMove(board, this, candidateDestinationCoordinate));
+                }
+            } else if (currentCandidateOffset == 7 &&
+                      !IsPawnOnFirstOrEighthColumn(candidateDestinationCoordinate, this)) {
+                if (board.getTile(candidateDestinationCoordinate).isTileOccupied()) {
+                    // Determine the opponent's piece when not attacking in the first or eighth columns
+                    final Piece pieceOnCandidateTile = board.getTile(candidateDestinationCoordinate).getPieceOnTile();
+                    // TODO: attacking into a pawn promotion
+                    if (this.pieceAlliance != pieceOnCandidateTile.getPieceAlliance()) {
+                        legalMoves.add(new MajorMove(board, this, candidateDestinationCoordinate));
+                    }
+                }
+            } else if (currentCandidateOffset == 9 &&
+                      !IsPawnOnFirstOrEighthColumnReversed(candidateDestinationCoordinate, this)) {
+                if (board.getTile(candidateDestinationCoordinate).isTileOccupied()) {
+                    // Determine the opponent's piece when not attacking in the first or eighth columns
+                    final Piece pieceOnCandidateTile = board.getTile(candidateDestinationCoordinate).getPieceOnTile();
+                    // TODO: attacking into a pawn promotion
+                    if (this.pieceAlliance != pieceOnCandidateTile.getPieceAlliance()) {
+                        legalMoves.add(new MajorMove(board, this, candidateDestinationCoordinate));
+                    }
+                }
             }
 
         }
 
-        return legalMoves;
+        return Collections.unmodifiableList(legalMoves);
+    }
+
+    /**
+     * Determines the first half of if the pawn can do a double jump.
+     * @param currentCandidateOffset the offset of the pawn's destination
+     * @param candidateDestinationCoordinate the coordinate of the pawn's destination
+     * @return the first half of whether the pawn can double jump
+     */
+    private boolean canDoubleJump(final int currentCandidateOffset, final int candidateDestinationCoordinate) {
+        return  currentCandidateOffset == 16 &&
+                this.isFirstMove() &&
+                IsPawnOnSecondOrSeventhRow(candidateDestinationCoordinate, this);
+    }
+
+    /**
+     * Determines if the pawn move is non-attacking.
+     * @param currentCandidateOffset the offset of the pawn's destination
+     * @param candidateDestinationCoordinate the coordinate of the pawn's destination
+     * @param board the chess board
+     * @return whether the pawn's move is non-attacking
+     */
+    private boolean isNonAttackingMove(
+            final int currentCandidateOffset,
+            final int candidateDestinationCoordinate,
+            final Board board) {
+        return currentCandidateOffset == 8 && !(board.getTile(candidateDestinationCoordinate).isTileOccupied());
     }
 }

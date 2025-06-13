@@ -11,6 +11,7 @@ import java.util.Collection;
 public abstract class Piece {
     protected final int piecePosition;
     protected final Alliance pieceAlliance;
+    protected final boolean firstMove;
 
     /**
      * Constructor for a Piece.
@@ -20,6 +21,8 @@ public abstract class Piece {
     protected Piece(final int piecePosition, final Alliance pieceAlliance) {
         this.piecePosition = piecePosition;
         this.pieceAlliance = pieceAlliance;
+        // TODO: implement more attributes for pieces
+        this.firstMove = false;
     }
 
     /**
@@ -35,5 +38,12 @@ public abstract class Piece {
      */
     public Alliance getPieceAlliance() {
         return this.pieceAlliance;
+    }
+
+    /**
+     * @return whether it is the piece's first move
+     */
+    public boolean isFirstMove() {
+        return this.firstMove;
     }
 }
