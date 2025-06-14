@@ -1,10 +1,10 @@
 package utils;
 
 import board.Board;
-import move.AttackMove;
-import move.MajorMove;
+import move.other.AttackMove;
+import move.other.MajorMove;
 import move.Move;
-import piece.Alliance;
+import piece.attributes.Alliance;
 import piece.Piece;
 import tile.Tile;
 

@@ -2,6 +2,8 @@ package board;
 
 import move.Move;
 import piece.*;
+import piece.attributes.Alliance;
+import piece.pieces.*;
 import player.BlackPlayer;
 import player.Player;
 import player.WhitePlayer;
@@ -9,7 +11,7 @@ import tile.Tile;
 
 import java.util.*;
 
-import static piece.Alliance.*;
+import static piece.attributes.Alliance.*;
 import static utils.Constants.BoardConstants.TILES_ON_BOARD;
 import static utils.Constants.BoardConstants.TILES_PER_ROW;
 
@@ -38,7 +40,7 @@ public class Board {
         this.whitePlayer = new WhitePlayer(this, whiteInitialLegalMoves, blackInitialLegalMoves);
         this.blackPlayer = new BlackPlayer(this, whiteInitialLegalMoves, blackInitialLegalMoves);
 
-        this.currentPlayer = null;
+        this.currentPlayer = boardBuilder.nextMoveMaker.choosePlayer(this.whitePlayer, this.blackPlayer);
     }
 
     /**
@@ -213,6 +215,19 @@ public class Board {
      */
     public Player getCurrentPlayer() {
         return this.currentPlayer;
+    }
+
+    /**
+     * @return all legal moves for both white and black
+     */
+    public Iterable<Move> getAllLegalMoves() {
+        List<Move> allLegalMoves = new ArrayList<>();
+
+        allLegalMoves.addAll(this.whitePlayer.getLegalMoves());
+        allLegalMoves.addAll(this.blackPlayer.getLegalMoves());
+
+        return Collections.unmodifiableList(allLegalMoves);
+
     }
 
     /**

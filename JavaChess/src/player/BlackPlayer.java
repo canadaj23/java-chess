@@ -2,12 +2,12 @@ package player;
 
 import board.Board;
 import move.Move;
-import piece.Alliance;
+import piece.attributes.Alliance;
 import piece.Piece;
 
 import java.util.Collection;
 
-import static piece.Alliance.BLACK;
+import static piece.attributes.Alliance.BLACK;
 
 public class BlackPlayer extends Player {
 

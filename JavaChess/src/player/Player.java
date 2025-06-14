@@ -3,8 +3,8 @@ package player;
 import board.Board;
 import move.Move;
 import move.MoveTransition;
-import piece.Alliance;
-import piece.King;
+import piece.attributes.Alliance;
+import piece.pieces.King;
 import piece.Piece;
 
 import java.util.ArrayList;
