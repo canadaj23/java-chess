@@ -1,6 +1,6 @@
 package main;
 
-import board.Board;
+import chess.game.board.Board;
 
 /**
  * This is the driver class to run the chess game.
@@ -10,5 +10,7 @@ public class Main {
         Board board = Board.CreateInitialBoard();
 
         System.out.println(board);
+
+        new Game();
     }
 }
