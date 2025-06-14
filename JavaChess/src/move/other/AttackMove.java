@@ -33,4 +33,47 @@ public class AttackMove extends Move {
     public Board executeMove() {
         return null;
     }
+
+    /**
+     * @return whether the move is an attack
+     */
+    @Override
+    public boolean isAttack() {
+        return true;
+    }
+
+    /**
+     * @return the attacked piece
+     */
+    @Override
+    public Piece getAttackedPiece() {
+        return this.attackedPiece;
+    }
+
+    /**
+     * @return a hashcode for an AttackMove
+     */
+    @Override
+    public int hashCode() {
+        return this.attackedPiece.hashCode() + super.hashCode();
+    }
+
+    /**
+     * @param other the other move in question
+     * @return whether the two moves are both an AttackMove
+     */
+    @Override
+    public boolean equals(final Object other) {
+        if (this == other) {
+            return true;
+        }
+
+        if (!(other instanceof AttackMove)) {
+            return false;
+        }
+
+        final AttackMove otherAttackMove = (AttackMove) other;
+
+        return super.equals(otherAttackMove) && getAttackedPiece().equals(otherAttackMove.getAttackedPiece());
+    }
 }

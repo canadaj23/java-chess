@@ -16,6 +16,7 @@ public abstract class Piece {
     protected final boolean firstMove;
     protected PieceType pieceType;
     protected boolean isKing = false;
+    protected boolean isRook = false;
     private final int cashedHashCode;
 
     /**
@@ -68,6 +69,13 @@ public abstract class Piece {
      */
     public boolean isKing() {
         return this.isKing;
+    }
+
+    /**
+     * @return whether the piece is a Rook
+     */
+    public boolean isRook() {
+        return this.isRook;
     }
 
     /**

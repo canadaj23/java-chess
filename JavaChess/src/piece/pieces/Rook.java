@@ -23,6 +23,7 @@ public class Rook extends Piece {
      */
     public Rook(final int piecePosition, final Alliance pieceAlliance) {
         super(ROOK, piecePosition, pieceAlliance);
+        isRook = true;
     }
 
     /**

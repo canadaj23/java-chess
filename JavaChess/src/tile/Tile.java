@@ -29,6 +29,13 @@ public abstract class Tile {
         return piece != null ? new OccupiedTile(tileCoordinate, piece) : EMPTY_TILES_CACHE.get(tileCoordinate);
     }
 
+    /**
+     * @return the tile's coordinate
+     */
+    public int getTileCoordinate() {
+        return this.tileCoordinate;
+    }
+
     //---------------------------- Abstract Methods ----------------------------
     /**
      * Determines an empty/occupied tile.

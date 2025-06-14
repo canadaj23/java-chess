@@ -6,6 +6,7 @@ import move.MoveTransition;
 import piece.attributes.Alliance;
 import piece.pieces.King;
 import piece.Piece;
+import tile.Tile;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -13,6 +14,8 @@ import java.util.Collections;
 import java.util.List;
 
 import static move.MoveStatus.*;
+import static piece.attributes.Alliance.BLACK;
+import static piece.attributes.Alliance.WHITE;
 
 public abstract class Player {
     protected final Board board;
@@ -32,7 +35,8 @@ public abstract class Player {
             final Collection<Move> opponentLegalMoves) {
         this.board = board;
         this.playerKing = establishKing();
-        this.legalMoves = legalMoves;
+        legalMoves.addAll(calculateKingCastles(legalMoves, opponentLegalMoves));
+        this.legalMoves = Collections.unmodifiableCollection(legalMoves);
         this.inCheck = !CalculateAttacksOnKing(this.playerKing.getPiecePosition(), opponentLegalMoves).isEmpty();
     }
 
@@ -55,7 +59,7 @@ public abstract class Player {
      * @param moves the collection of moves
      * @return a list of attack moves affecting the King
      */
-    static Collection<Move> CalculateAttacksOnKing(final int piecePosition, final Collection<Move> moves) {
+    protected static Collection<Move> CalculateAttacksOnKing(final int piecePosition, final Collection<Move> moves) {
         final List<Move> attackMoves = new ArrayList<>();
 
         // Search for attack moves
@@ -176,4 +180,13 @@ public abstract class Player {
      * @return the player's opponent
      */
     public abstract Player getOpponent();
+
+    /**
+     * @param legalPlayerMoves the player's legal moves
+     * @param legalOpponentMoves the opponent's legal moves
+     * @return the legal castling moves for a player
+     */
+    protected abstract Collection<Move> calculateKingCastles(
+            final Collection<Move> legalPlayerMoves,
+            final Collection<Move> legalOpponentMoves);
 }

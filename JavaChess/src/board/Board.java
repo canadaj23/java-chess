@@ -158,7 +158,7 @@ public class Board {
             legalMoves.addAll(piece.calculateLegalMoves(this));
         }
 
-        return Collections.unmodifiableList(legalMoves);
+        return legalMoves;
     }
 
     /**
@@ -236,6 +236,7 @@ public class Board {
     public static class BoardBuilder {
         Map<Integer, Piece> boardConfiguration;
         Alliance nextMoveMaker;
+        Pawn enPassantPawn;
 
         /**
          * Publicly accessed constructor for a BoardBuilder object.
@@ -245,8 +246,8 @@ public class Board {
         }
 
         /**
-         * Places the piece in the board map.
-         * @param piece what will be places in the board map
+         * Sets the piece on the board.
+         * @param piece what will be placed in the board map
          * @return the BoardBuilder object
          */
         public BoardBuilder setPiece(final Piece piece) {
@@ -269,6 +270,14 @@ public class Board {
          */
         public Board buildBoard() {
             return new Board(this);
+        }
+
+        /**
+         * Sets the piece on the board as an En Passant Pawn.
+         * @param enPassantPawn what will be placed in the board map
+         */
+        public void setEnPassantPawn(final Pawn enPassantPawn) {
+            this.enPassantPawn = enPassantPawn;
         }
     }
 }

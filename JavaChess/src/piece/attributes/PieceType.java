@@ -21,5 +21,4 @@ public enum PieceType {
     public String toString() {
         return this.pieceName;
     }
-
 }

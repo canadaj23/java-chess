@@ -65,10 +65,9 @@ public abstract class Move {
     /**
      * @param boardBuilder what will make the subsequent board
      */
-    private void makePieces(final Board.BoardBuilder boardBuilder) {
+    protected void makePieces(final Board.BoardBuilder boardBuilder) {
         // Make the current player's active pieces
         for (final Piece piece : this.board.getCurrentPlayer().getActivePieces()) {
-            // TODO: implement hashcode and equals for pieces
             if (!this.movedPiece.equals(piece)) {
                 boardBuilder.setPiece(piece);
             }
@@ -80,5 +79,60 @@ public abstract class Move {
                 boardBuilder.setPiece(piece);
             }
         }
+    }
+
+    /**
+     * @return whether the move is an attack
+     */
+    public boolean isAttack() {
+        return false;
+    }
+
+    /**
+     * @return whether the move is a castling move
+     */
+    public boolean isCastlingMove() {
+        return false;
+    }
+
+    /**
+     * @return the attacked piece
+     */
+    public Piece getAttackedPiece() {
+        return null;
+    }
+
+    /**
+     * @return an overridden hashcode
+     */
+    @Override
+    public int hashCode() {
+        int result = 1;
+        result = 31 * result + this.destinationCoordinate;
+        result = 31 * result + this.movedPiece.hashCode();
+
+        return result;
+    }
+
+    /**
+     * Determines if two moves are the same.
+     * @param other the other move in question
+     * @return whether two moves are the same
+     */
+    @Override
+    public boolean equals(final Object other) {
+        // If the moves are equal
+        if (this == other) {
+            return true;
+        }
+        // If the other move is not a Move
+        if (!(other instanceof Move)) {
+            return false;
+        }
+
+        final Move otherMove = (Move) other;
+
+        return getDestinationCoordinate() == otherMove.getDestinationCoordinate() &&
+               getMovedPiece().equals(otherMove.getMovedPiece());
     }
 }
